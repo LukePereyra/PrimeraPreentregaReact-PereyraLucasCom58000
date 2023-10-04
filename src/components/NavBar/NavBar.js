@@ -1,5 +1,6 @@
 import CartWidget from "../CartWidget/CartWidget"
-import Osito from "../CartWidget/assets/osito.png"
+import OsitoOG from "../CartWidget/assets/OsitoOG.png"
+import { NavLink, Link } from "react-router-dom";
 
 
 const NavBar = () => {
@@ -8,9 +9,9 @@ const NavBar = () => {
             <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item">
-      <img src={Osito} className="image is-64x64"/>
-    </a>
+    <Link to="/" class="navbar-item">
+      <img src={OsitoOG} className="image is-64x64"/>
+    </Link>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -21,13 +22,13 @@ const NavBar = () => {
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Comprá
-      </a>
+      <NavLink to={"/category/hombre"} class="navbar-item">
+        Compra
+      </NavLink>
 
-      <a class="navbar-item">
+      <Link to={"/category/mujer"} class="navbar-item">
         Recetas
-      </a>
+      </Link>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -55,6 +56,7 @@ const NavBar = () => {
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
+          <CartWidget/>
           <a class="button is-primary">
             <strong>Sign up</strong>
           </a>
@@ -67,7 +69,7 @@ const NavBar = () => {
   </div>
 </nav>
             </div>
-            <CartWidget/>
+            
         </nav>
     )
 }
