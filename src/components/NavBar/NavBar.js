@@ -23,7 +23,7 @@ const NavBar = () => {
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <NavLink to={"/category/hombre"} class="navbar-item">
-        Compra
+        Compra 
       </NavLink>
 
       <Link to={"/category/mujer"} class="navbar-item">
@@ -73,6 +73,7 @@ const NavBar = () => {
         </nav>
     )
 }
+console.log(NavBar)
 
 
 export default NavBar
