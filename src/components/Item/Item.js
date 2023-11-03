@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 
 
-function Item ({id, title, image, price, stock }){
+function Item ({id, nombre, imagen, precio, stock }){
 
     console.log(stock)
 
@@ -10,18 +10,18 @@ function Item ({id, title, image, price, stock }){
         <article className="CardItem">
             <header className="CardItemHeader">
                 <h2 className="ItemHeader">
-                    {title}
+                    {nombre}
                 </h2>
             </header>
             <picture className="Imagen">
-                <img src={image} alt={title} className="ItemImg"/>
+                <img src={imagen} alt={nombre} className="ItemImg"/>
             </picture>
             <section>
                 <p className="Info">
-                    Precio: ${price}
+                    Precio: ${precio}
                 </p>
                 <p className="Info">
-                    Stock disponible: {stock } 
+                    Stock disponible: {stock} 
                 </p>
             </section>
             <footer className="CardItemFooter">

@@ -1,41 +1,41 @@
-import { useState, useEffect } from "react"
-import ItemDetail from "../ItemDetail/ItemDetail"
-import { useParams } from "react-router-dom"
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
+import { useState, useEffect } from "react";
+import ItemDetail from "../ItemDetail/ItemDetail";
+import { useParams } from "react-router-dom";
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebaseConfig';
 
 function ItemDetailContainer () {
-
     const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true)
-
+    const [loading, setLoading] = useState(true);
     const { itemId } = useParams();
     
-    useEffect(()=>{
-        setLoading(true)
+    useEffect(() => {
+        const docRef = doc(db, 'Comidas', itemId);
 
-        const docRef = doc(db, 'Comidas', itemId)
-
+        setLoading(true); 
         getDoc(docRef)
             .then(response => {
-                const data = response.data()
-                const productAdapted = { id: response.id, ...data }
-            setProduct(productAdapted)
+                const data = response.data();
+                const productAdapted = { id: response.id, ...data };
+                setProduct(productAdapted);
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
             })
-            .finalyy(() => {
-                setLoading(false)
-            })
-        }, [itemId])
+            .finally(() => {
+                setLoading(false); 
+            });
+    }, [itemId]);
 
-    return(
+    return (
         <div className="ItemDetailContainer">
-            <ItemDetail {...product}/>
+            {loading ? (
+                <p>Cargando...</p>
+            ) : (
+                <ItemDetail {...product} />
+            )}
         </div>
-    )
-
+    );
 }
 
 export default ItemDetailContainer;

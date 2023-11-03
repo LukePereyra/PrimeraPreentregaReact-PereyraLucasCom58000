@@ -2,7 +2,6 @@ import CartContext from "../../context/CartContext"
 import cart from "./assets/cart.svg"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
-// import { CartContext } from "../../context/CartContext"
 
 
 const CartWidget = () => {

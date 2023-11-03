@@ -9,13 +9,18 @@ export const CartProvider = ({ children }) => {
 
     console.log(cart)
 
-    const addItem = (item,quantity) => {
-        if(!isInCart(item.id)) {
-            setCart(prev => [...prev, {...item, quantity}])
+    const addItem = (item, quantity) => {
+        if (!isInCart(item.id)) {
+            setCart((prev) => [...prev, { ...item, quantity }]);
         } else {
-            console.error('El producto ya fue agregado')
+            setCart((prev) =>
+                prev.map((product) =>
+                    product.id === item.id ? { ...product, quantity } : product
+                )
+            );
         }
-    }
+    };
+    
 
     const removeItem = (itemId) => {
         const cartUpdated = cart.filter(prod => prod.id !== itemId)

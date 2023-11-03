@@ -1,5 +1,6 @@
-import { useState, useContext, Timestamp, writeBatch, collection, getDocs, query, where, documentId, addDoc, id } from "react"
-import { db, } from "../../services/firebase/firebaseConfig"
+import { useState, useContext, writeBatch, collection, getDocs, query, where, documentId, addDoc } from "react"
+import { db} from "../../services/firebase/firebaseConfig"
+import { Timestamp,  } from "firebase/firestore"
 import CartContext from "../../context/CartContext"
 import CheckoutForm from "../CheckoutForm/CheckoutForm"
 
@@ -53,7 +54,7 @@ const Checkout = () => {
 
                 const orderAdded = await addDoc(orderRef, objOrder)
 
-                setOrderId(orderAdded,id)
+                setOrderId(orderAdded.id)
                 clearCart()
             } else {
                 console.error('hay productos fuera de stock')

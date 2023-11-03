@@ -1,79 +1,78 @@
-import CartWidget from "../CartWidget/CartWidget"
-import OsitoOG from "../CartWidget/assets/OsitoOG.png"
+import CartWidget from "../CartWidget/CartWidget";
+import OsitoOG from "../CartWidget/assets/OsitoOG.png";
 import { NavLink, Link } from "react-router-dom";
 
-
 const NavBar = () => {
-    return (
-        <nav>
-            <div>
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <Link to="/" class="navbar-item">
-      <img src={OsitoOG} className="image is-64x64"/>
-    </Link>
+  return (
+    <nav>
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-item">
+            <img src={OsitoOG} className="image is-64x64" alt="imagenOso" />
+          </Link>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <NavLink to={"/category/hombre"} class="navbar-item">
-        Compra 
-      </NavLink>
-
-      <Link to={"/category/mujer"} class="navbar-item">
-        Recetas
-      </Link>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Conocenos
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            Quienes somos
-          </a>
-          <a class="navbar-item">
-            Nuestra historia
-          </a>
-          <a class="navbar-item">
-            Contacto
-          </a>
-          <hr class="navbar-divider"/>
-          <a class="navbar-item">
-            Sugerencias
-          </a>
+          <div
+            role="button"
+            className="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <CartWidget/>
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-start">
+            <NavLink to="/category/hombre" className="navbar-item">
+              Compra
+            </NavLink>
+
+            <Link to="/category/mujer" className="navbar-item">
+              Recetas
+            </Link>
+
+            <div className="navbar-item has-dropdown is-hoverable">
+              <div className="navbar-link">Conocenos</div>
+
+              <div className="navbar-dropdown">
+                <Link to="/quienes-somos" className="navbar-item">
+                  Quienes somos
+                </Link>
+                <Link to="/nuestra-historia" className="navbar-item">
+                  Nuestra historia
+                </Link>
+                <Link to="/contacto" className="navbar-item">
+                  Contacto
+                </Link>
+                <hr className="navbar-divider" />
+                <Link to="/sugerencias" className="navbar-item">
+                  Sugerencias
+                </Link>
+              </div>
             </div>
-            
-        </nav>
-    )
-}
-console.log(NavBar)
+          </div>
 
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <CartWidget />
+                <Link to="/signup" className="button is-primary">
+                  <strong>Sign up</strong>
+                </Link>
+                <Link to="/login" className="button is-light">
+                  Log in
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </nav>
+  );
+};
 
-export default NavBar
+export default NavBar;
+
