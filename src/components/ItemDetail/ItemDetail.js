@@ -1,51 +1,67 @@
-import ItemCount from "../ItemCount/ItemCount"
-import { useState, useContext } from "react"
-import { Link } from "react-router-dom"
-import CartContext from "../../context/CartContext"
-import './ItemDetail.css'
+import ItemCount from "../ItemCount/ItemCount";
+// import Cart from "../Cart/Cart";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
-function ItemDetail({ id, nombre, imagen, precio, stock }) {
-    const { addItem } = useContext(CartContext);
-    
-    const [quantityAdded, setQuantityAdded] = useState(0);
+const ItemDetail = ({
+  id,
+  nombre,
+  imagen,
+  categoria,
+  precio,
+  stock,
+}) => {
+  const [quantityAdded, setQuantityAdded] = useState(0);
 
-    const handleOnAdd = (quantity) => {
-        setQuantityAdded(quantity)
+  const { addItem } = useContext(CartContext);
 
-        const item = {
-            id, nombre, precio
-        }
+  const handleOnAdd = (quantity) => {
+    setQuantityAdded(quantity);
 
-        addItem(item, quantity)
-    }
+    const item = {
+      id,
+      nombre,
+      precio,
+      imagen,
+      categoria
+    };
 
-    return (
-        <article className="CardItem">
-            <header className="Header">
-                <h2 className="itemHeader">
-                    {nombre}
-                </h2>
-            </header>
-            <picture>
-                <img src={imagen} alt={nombre} className="ItemImg"/>
-            </picture>
-            <section>
-                <p className="Info">
-                    Precio: ${precio}
-                </p>
-            </section>
-            <footer className="ItemFooter">
-                {
-                    quantityAdded > 0 ? (
-                        <Link to='/cart' className="Option">Terminar Compra</Link>
-                    ) : (
-                        <ItemCount initial={1} stock={stock} onAdd={handleOnAdd}/>
-                    )
-                }
-            </footer>
-        </article>
-    )
-}
+    addItem(item, quantity);
+  };
 
+  return (
+    <article className="bg-white p-4 rounded-lg shadow-md">
+      <header className="mb-4">
+        <h2 className="text-2xl text-verde-agua font-semibold">{nombre}</h2>
+      </header>
+      <picture>
+        <img src={imagen} alt={nombre} className="rounded-md" />
+      </picture>
+      <section className="mt-4">
+        <p className="text-verde-agua font-semibold">Categoria: {categoria}</p>
+        <p className="text-verde-agua font-semibold">Precio: ${precio}</p>
+      </section>
+      <footer className="mt-4">
+        <div className="flex justify-center">
+          {quantityAdded > 0 ? (
+            <Link
+              to="/cart"
+              className="bg-verde-agua text-white py-2 px-4 rounded-md hover:bg-dark-verde-agua focus:ring focus:ring-verde-agua focus:outline-none"
+            >
+              Terminar Compra
+            </Link>
+          ) : (
+            <ItemCount
+              stock={stock}
+              initial={1}
+              onAdd={(quantity) => handleOnAdd(quantity)}
+            />
+          )}
+        </div>
+      </footer>
+    </article>
+  );
+};
 
 export default ItemDetail;

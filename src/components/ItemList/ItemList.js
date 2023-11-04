@@ -1,12 +1,13 @@
-import Item from "../Item/Item"
+import Item from "../Item/Item";
 
-const ItemList = ({ productos }) => {
-    return (
-      <div className="ListGroup">
-        {productos && productos.map(prod => <Item key={prod.id} {...prod} />)}
-      </div>
-    );
-  }
-  
+const ItemList = ({ products }) => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {products.map((prod) => (
+        <Item key={prod.id} {...prod} />
+      ))}
+    </div>
+  );
+};
 
-export default ItemList
+export default ItemList;

@@ -1,46 +1,50 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext({
-    cart: []
-})
+  cart: [],
+  total: 0, 
+  addItem: () => {},
+  removeItem: () => {},
+  clearCart: () => {}
+});
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0); 
 
-    console.log(cart)
-
-    const addItem = (item, quantity) => {
-        if (!isInCart(item.id)) {
-            setCart((prev) => [...prev, { ...item, quantity }]);
-        } else {
-            setCart((prev) =>
-                prev.map((product) =>
-                    product.id === item.id ? { ...product, quantity } : product
-                )
-            );
-        }
-    };
-    
-
-    const removeItem = (itemId) => {
-        const cartUpdated = cart.filter(prod => prod.id !== itemId)
-        setCart(cartUpdated)
+  const addItem = (item, quantity) => {
+    if (!isInCart(item.id)) {
+      setCart((prev) => [...prev, { ...item, quantity }]);
+    } else {
+      console.error("El producto ya fue agregado");
     }
+  };
 
-    const clearCart = () => {
-        setCart([])
-    }
+  const removeItem = (itemId) => {
+    const cartUpdated = cart.filter((prod) => prod.id !== itemId);
+    setCart(cartUpdated);
+  };
 
-    const isInCart = (itemId) => {
-        return cart.some(prod => prod.id === itemId)
-    }
+  const clearCart = () => {
+    setCart([]);
+  };
 
-    return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart}}>
-            { children }
-        </CartContext.Provider>
-    )
-}
+  const isInCart = (itemId) => {
+    return cart.some((prod) => prod.id === itemId);
+  };
 
+  useEffect(() => {
+    const newTotal = cart.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0);
+    setTotal(newTotal);
+  }, [cart]);
 
-export default CartContext
+  return (
+    <CartContext.Provider value={{ cart, total, addItem, removeItem, clearCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export default CartContext;

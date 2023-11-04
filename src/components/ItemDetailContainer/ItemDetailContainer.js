@@ -28,14 +28,14 @@ function ItemDetailContainer () {
     }, [itemId]);
 
     return (
-        <div className="ItemDetailContainer">
-            {loading ? (
-                <p>Cargando...</p>
-            ) : (
-                <ItemDetail {...product} />
-            )}
+        <div className="p-4">
+          {loading ? (
+            <p className="text-verde-agua text-lg">Cargando...</p>
+          ) : (
+            <ItemDetail {...product} />
+          )}
         </div>
-    );
-}
-
-export default ItemDetailContainer;
+      );
+    };
+    
+    export default ItemDetailContainer;

@@ -1,78 +1,35 @@
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 import OsitoOG from "../CartWidget/assets/OsitoOG.png";
-import { NavLink, Link } from "react-router-dom";
 
-const NavBar = () => {
-  return (
-    <nav>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
-            <img src={OsitoOG} className="image is-64x64" alt="imagenOso" />
-          </Link>
-
-          <div
-            role="button"
-            className="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </div>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <NavLink to="/category/hombre" className="navbar-item">
-              Compra
-            </NavLink>
-
-            <Link to="/category/mujer" className="navbar-item">
-              Recetas
-            </Link>
-
-            <div className="navbar-item has-dropdown is-hoverable">
-              <div className="navbar-link">Conocenos</div>
-
-              <div className="navbar-dropdown">
-                <Link to="/quienes-somos" className="navbar-item">
-                  Quienes somos
+const Navbar = () => {
+    return (
+        <nav className="bg-green-200 p-4">
+            <div className="container mx-auto flex justify-between items-center">
+                <Link to="/" className="text-white text-2xl font-bold">
+                    <img src={OsitoOG} className="w-12 h-12" alt="imagenOso" />
                 </Link>
-                <Link to="/nuestra-historia" className="navbar-item">
-                  Nuestra historia
-                </Link>
-                <Link to="/contacto" className="navbar-item">
-                  Contacto
-                </Link>
-                <hr className="navbar-divider" />
-                <Link to="/sugerencias" className="navbar-item">
-                  Sugerencias
-                </Link>
-              </div>
+
+                <div className="space-x-4">
+                    <NavLink to={`/categoria/Platos`} activeClassName="ActiveOption" className="Option">Platos</NavLink>
+                    <NavLink to={`/categoria/Para hacer`} activeClassName="ActiveOption" className="Option">Para hacer</NavLink>
+                    <NavLink to={`/categoria/Postre`} activeClassName="ActiveOption" className="Option">Postres</NavLink>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                    <CartWidget />
+                    <Link to="/signup" className="text-white hover:text-green-500">
+                        Sign up
+                    </Link>
+                    <Link to="/login" className="text-white hover:text-green-500">
+                        Log in
+                    </Link>
+                </div>
             </div>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <CartWidget />
-                <Link to="/signup" className="button is-primary">
-                  <strong>Sign up</strong>
-                </Link>
-                <Link to="/login" className="button is-light">
-                  Log in
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </nav>
-  );
+        </nav>
+    );
 };
 
-export default NavBar;
+export default Navbar;
 
